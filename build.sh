@@ -27,5 +27,5 @@ SYSROOT=$NDK_DIR/platforms/$TARGET/$ARCH
 shift
 CC="$CC  --sysroot=$SYSROOT" ./configure --host=$HOST --disable-utmp --disable-utmpx "$@"
 sed -i 's/^\#define HAVE_STRUCT_UTMP_UT_TYPE 1/\#undef HAVE_STRUCT_UTMP_UT_TYPE/g' config.h
-
-make PROGRAMS=dbclient
+sed -i 's/^\#define ENABLE_CLI_PASSWORD_AUTH//g' options.h
+make PROGRAMS="dbclient dropbearkey"
